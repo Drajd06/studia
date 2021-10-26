@@ -55,8 +55,9 @@ class wielobok {
     }
     wielobok& operator=(const wielobok& r) {
         if (this != &r) {
+            delete[] wsk;
             roz = r.roz;
-            wsk = new punkt[roz];
+            wsk = roz ? new punkt[roz] : 0;
             for (size_t i = 0; i < roz; i++) wsk[i] = r.wsk[i];
         }
         return *this;
