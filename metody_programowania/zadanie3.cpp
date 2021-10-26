@@ -67,9 +67,7 @@ class wielobok {
 
     punkt& operator[](const size_t i) { return wsk[i]; }
 
-    ~wielobok() {
-        if (wsk) delete[] wsk;
-    }
+    ~wielobok() {delete[] wsk;}
 
     const size_t& ilosc() const { return roz; }
 
