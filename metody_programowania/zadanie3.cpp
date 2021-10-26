@@ -38,8 +38,7 @@ class wielobok {
         : roz(e - b > 0 ? e - b : 0), wsk(roz ? new punkt[roz] : 0) {
         wsk = new punkt[roz];
         for (size_t i = 0; i < roz; i++) {
-            wsk[i].x() = b[i].x();
-            wsk[i].y() = b[i].y();
+            wsk[i] = b[i];
         }
     }
 
@@ -49,11 +48,9 @@ class wielobok {
         return ob;
     }
 
-    wielobok(const wielobok& r) : roz(r.roz) {
-        wsk = new punkt[roz];
+    wielobok(const wielobok& r) : roz(r.roz), wsk(roz ? new punkt[roz] : 0) {
         for (size_t i = 0; i < roz; i++) {
-            wsk[i].x() = r.wsk[i].x();
-            wsk[i].y() = r.wsk[i].y();
+            wsk[i] = r.wsk[i];
         }
     }
     wielobok& operator=(const wielobok& r) {
@@ -65,7 +62,10 @@ class wielobok {
         return *this;
     }
 
-    punkt& operator[](const size_t i) { return wsk[i]; }
+    punkt& operator[](const size_t i) {
+      if(i >= roz) throw string("indeks poza zakresem");
+      return wsk[i];
+    }
 
     ~wielobok() {delete[] wsk;}
 
