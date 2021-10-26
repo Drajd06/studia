@@ -16,7 +16,7 @@ class punkt {
     double& x() { return _x; }
     double& y() { return _y; }
 
-    const double odleglosc(punkt p) {
+    const double odleglosc(const punkt& p) {
         return sqrt((p._x - _x) * (p._x - _x) + (p._y - _y) * (p._y - _y));
     }
 
