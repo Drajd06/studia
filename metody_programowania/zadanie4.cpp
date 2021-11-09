@@ -33,14 +33,12 @@ class point {
     friend const point operator*(const double a, const point& p);
     friend const point operator*(const point& p, const double a);
 
-    bool operator<(const point& p) {
-        if (distance(point()) < p.distance(point())) return true;
-        return false;
+    bool operator<(const point& p) const{
+      return distance(point()) < p.distance(point());
     };
 
-    bool operator==(const point& p) {
-        if (distance(p.tab) < 1e-10) return true;
-        return false;
+    bool operator==(const point& p) const{
+        return fabs(distance(point()) - p.distance(point())) < 1e-10;
     };
 
     friend istream& operator>>(istream& cin, point& p);
@@ -49,7 +47,7 @@ class point {
 ostream& operator<<(ostream& out, const point& p) {
     return out << p.tab[0] << ' ' << p.tab[1] << ' ' << p.tab[2];
 }
-
+<
 const point operator*(const double a, const point& p) {
     return point(a * p.tab[0], a * p.tab[1], a * p.tab[2]);
 };
