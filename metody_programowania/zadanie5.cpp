@@ -86,6 +86,10 @@ double polygon::obwod() const {
             throw string("Wartosc wieksza od " + n +
                          string(" w tablicy order."));
         obw += points[j].distance(points[order[(i + 1) % n] - 1]);
+        //0+1%4-1 = 1
+        //          2
+        //          3
+        //          0
     }
     return obw;
 }
