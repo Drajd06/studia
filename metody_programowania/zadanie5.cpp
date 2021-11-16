@@ -9,17 +9,17 @@
 
 using namespace std;
 
-class uint {
+class Uint {
     unsigned v;
 
    public:
-    uint() : v(0) {}
-    uint(const unsigned& a) : v(a) {}
+    Uint() : v(0) {}
+    Uint(const unsigned& a) : v(a) {}
     operator unsigned() const { return v; }
-    friend ostream& operator<<(ostream& out, const uint& r) {
+    friend ostream& operator<<(ostream& out, const Uint& r) {
         return out << r.v;
     }
-    friend istream& operator>>(istream& in, uint& r) { return in >> r.v; }
+    friend istream& operator>>(istream& in, Uint& r) { return in >> r.v; }
 };
 
 struct blad {
@@ -32,7 +32,7 @@ ostream& operator<<(ostream& out, const blad& p) {
     return out << p.txt << ' ' << p.lp << endl;
 }
 
-using naturalne = uint;
+using naturalne = Uint;
 
 class polygon;
 
@@ -131,12 +131,13 @@ void polygon::read(ifstream& file) {
         for (size_t j = 0; j < 3; j++) {
             file >> tmpValues[j];
         }
+
         getline(file, tmp);
         if (!file || tmp[0] != '\0') {
-            blad b("Nieprawidlowa ilosc znakow tablicy [NODES] w linii: ", i + 1);
-            cout << b;
-            // throw string("Nieprawidlowa ilosc znakow tablicy [NODES] w linii:
-            // " + to_string(i) + "\n\"");
+            // blad b("Nieprawidlowa ilosc znakow tablicy [NODES] w linii: ", i + 1);
+            // cout << b;
+            // throw;
+            throw string("Nieprawidlowa ilosc znakow tablicy [NODES] w linii: " + to_string(i+1) + "\n");
         }
         points[(int)tmpValues[0] - 1].x = tmpValues[1];
         points[(int)tmpValues[0] - 1].y = tmpValues[2];
