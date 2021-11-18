@@ -9,17 +9,17 @@
 
 using namespace std;
 
-class Uint {
+class uint {
     unsigned v;
 
    public:
-    Uint() : v(0) {}
-    Uint(const unsigned& a) : v(a) {}
+    uint() : v(0) {}
+    uint(const unsigned& a) : v(a) {}
     operator unsigned() const { return v; }
-    friend ostream& operator<<(ostream& out, const Uint& r) {
+    friend ostream& operator<<(ostream& out, const uint& r) {
         return out << r.v;
     }
-    friend istream& operator>>(istream& in, Uint& r) { return in >> r.v; }
+    friend istream& operator>>(istream& in, uint& r) { return in >> r.v; }
 };
 
 struct blad {
@@ -32,7 +32,7 @@ ostream& operator<<(ostream& out, const blad& p) {
     return out << p.txt << ' ' << p.lp << endl;
 }
 
-using naturalne = Uint;
+using naturalne = uint;
 
 class polygon;
 
@@ -86,10 +86,6 @@ double polygon::obwod() const {
             throw string("Wartosc wieksza od " + n +
                          string(" w tablicy order."));
         obw += points[j].distance(points[order[(i + 1) % n] - 1]);
-        //0+1%4-1 = 1
-        //          2
-        //          3
-        //          0
     }
     return obw;
 }
@@ -131,20 +127,20 @@ void polygon::read(ifstream& file) {
 
     points = new point[n];
     for (size_t i = 0; i < n; i++) {
-        double* tmpValues = new double[3];
-        for (size_t j = 0; j < 3; j++) {
-            file >> tmpValues[j];
-        }
+        int index;
+
+        file >> index;
+        file >> points[index - 1].x;
+        file >> points[index - 1].y;
 
         getline(file, tmp);
         if (!file || tmp[0] != '\0') {
-            // blad b("Nieprawidlowa ilosc znakow tablicy [NODES] w linii: ", i + 1);
-            // cout << b;
-            // throw;
-            throw string("Nieprawidlowa ilosc znakow tablicy [NODES] w linii: " + to_string(i+1) + "\n");
+            blad b("Nieprawidlowa ilosc znakow tablicy [NODES] w linii: ",
+                   i + 1);
+            cout << b;
+            // throw string("Nieprawidlowa ilosc znakow tablicy [NODES] w linii:
+            // " + to_string(i) + "\n\"");
         }
-        points[(int)tmpValues[0] - 1].x = tmpValues[1];
-        points[(int)tmpValues[0] - 1].y = tmpValues[2];
     }
 
     getline(file, tmp);
